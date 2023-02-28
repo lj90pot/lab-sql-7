@@ -12,6 +12,19 @@ from actor
 group by  last_name
 having count=1; 
 
+
+select T1.first_name,
+T1.last_name, 
+T1.test
+from 
+	(select first_name, 
+	last_name, 
+	count(last_name) over (partition by last_name) as test
+	from actor) as T1
+where test =1
+;
+
+
 #Q2
 #Which last names appear more than once? 
 #We would use the same logic as in the previous question but this time we want to include the last names of the actors where the last name was present more than once
